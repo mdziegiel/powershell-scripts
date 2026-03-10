@@ -1,0 +1,2 @@
+$UserList = @("Administrator","GIDAdmin","DefaultAccount","Guest","IEUser","sshd","WDAGUtilityAccount")
+Get-WMIObject -Class Win32_UserAccount | Where-Object {$_.Name -notin $UserList} | Foreach {net user $_.Name /delete}
