@@ -1,5 +1,13 @@
-# Copies wallpaper.jpg locally, sets LOCK SCREEN (device-level),
-# and schedules DESKTOP BACKGROUND to be set at next user logon.
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Set Wallpaper and Lock Screen
+SYNOPSIS    : Sets lock screen and schedules desktop wallpaper deployment
+DESCRIPTION : Copies wallpaper.jpg to a local path, applies it as the
+              device-level lock screen, and schedules the desktop
+              background to be configured at the next user logon
+==============================================================================
+#>
 
 $ErrorActionPreference = "Stop"
 
