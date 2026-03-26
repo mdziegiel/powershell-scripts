@@ -1,19 +1,23 @@
 <#
-.Synopsis
-v3.5.0.0 12-October-2023
-.Description
-This script Uninstalls and Cleans up Dell SupportAssist for PCs if installed on the box.
-.FileName
-SupportAssistUninstall_Cleanup.ps1
-#>
-<#
-Return Codes: 
-	Exit 0 : Uninstall/Cleanup Successful.
-	Exit 1 : Uninstall/Cleanup Successful with reboot required.
-	Exit X : Uninstall/Cleanup Failed.
-EventID :
-	Information : 0
-	Error : 11725
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : SupportAssistUninstall_Cleanup.ps1
+VERSION     : 3.5.0.0
+DATE        : 12-October-2023
+
+SYNOPSIS    : Uninstalls and cleans up Dell SupportAssist
+DESCRIPTION : Removes Dell SupportAssist for PCs if installed, including
+              associated components and residual files
+
+RETURN CODES:
+    Exit 0 : Uninstall/Cleanup successful
+    Exit 1 : Uninstall/Cleanup successful, reboot required
+    Exit X : Uninstall/Cleanup failed
+
+EVENT IDs:
+    Information : 0
+    Error       : 11725
+==============================================================================
 #>
 
 $ProgressPreference = "SilentlyContinue"
