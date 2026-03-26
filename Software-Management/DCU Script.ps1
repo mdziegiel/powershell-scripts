@@ -1,4 +1,18 @@
-???# Create needed keys
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Dell Command Update Configuration
+SYNOPSIS    : Configures DCU settings and BIOS configuration
+DESCRIPTION : Configures Dell Command Update via registry and CLI,
+              including update scheduling and system behavior. May
+              include BIOS configuration actions and should be handled
+              securely in controlled environments
+
+ORGANIZATION: Hanskissle
+==============================================================================
+#>
+
+# Create needed keys
 New-Item -Path HKLM:\SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\Preferences\Settings\Schedule -ErrorAction SilentlyContinue
 New-Item -Path HKLM:\SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\Preferences\Settings\General -ErrorAction SilentlyContinue
 
@@ -14,5 +28,8 @@ New-ItemProperty -Path HKLM:\SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\P
 New-ItemProperty -Path HKLM:\SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\Preferences\Settings\General -Name SuspendBitLocker -Value 1 -PropertyType DWORD -Force
 New-ItemProperty -Path HKLM:\SOFTWARE\Dell\UpdateService\Clients\CommandUpdate\Preferences\Settings\General -Name UserConsentDefault -Value 0 -PropertyType DWORD -Force
 
-# Set BIOS password (Require Dell Command | Configure in place)
-Start-Process -FilePath "C:\Program Files\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList '/configure -biosPassword="NorthernBIOS9"'
+# Set BIOS password (REPLACE WITH SECURE VALUE - DO NOT HARDCODE IN PRODUCTION)
+$BiosPassword = "<BIOS_PASSWORD_HERE>"
+
+Start-Process -FilePath "C:\Program Files\Dell\CommandUpdate\dcu-cli.exe" `
+    -ArgumentList "/configure -biosPassword=`"$BiosPassword`""
