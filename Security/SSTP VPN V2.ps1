@@ -1,13 +1,16 @@
-################################
-# VARIABLES
-$Name = "Hanskissle VPN"
-$ServerAddress = "vpn.hanskissle.com" # IP Address or FQDN
-$TunnelType = "SSTP" # Values: PPTP | L2TP | SSTP | IKEv2 | Automatic
-$L2tpPsk = '[Insert PSK Here]'
-$AuthenticationMethod = "MSCHAPv2" # Values: PAP | CHAP | MSCHAPv2 | EAP
-$EncryptionLevel = "Required" # Values: NoEncryption | Optional | Required | Maximum
-$DnsSuffix = 'hk.lan'
-################################
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Configure SSTP VPN Connection
+SYNOPSIS    : Creates or updates an all-user VPN connection
+DESCRIPTION : Creates or updates a Windows VPN connection using the
+              specified connection settings, applies DNS suffix
+              configuration, enables split tunneling, and adds
+              static routes for internal network access
+
+ORGANIZATION: Hanskissle
+==============================================================================
+#>
 
 # If PowerShell supports VPN configuration, apply VPN configuration
 if (Get-Command 'Get-VpnConnection') {
