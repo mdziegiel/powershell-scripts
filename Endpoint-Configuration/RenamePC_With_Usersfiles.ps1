@@ -1,9 +1,12 @@
-﻿<#
-.SYNOPSIS
-    --.Replace "This PC" icon name with the actual name of the PC
-.DESCRIPTION
-    This script takes ownership of the registry value HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}
-    It then updates the key name to $env:ComputerName & The LocalizedName as well
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Rename This PC Icon
+SYNOPSIS    : Updates "This PC" display name to the local computer name
+DESCRIPTION : Modifies the CLSID registry key for "This PC" by taking
+              ownership and updating the display name and LocalizedName
+              values to reflect the current hostname ($env:COMPUTERNAME)
+==============================================================================
 #>
 
 #Requires -Version 3.0
