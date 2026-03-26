@@ -1,3 +1,15 @@
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Set Windows Features
+SYNOPSIS    : Enables or disables Windows optional features
+DESCRIPTION : Manages Windows optional features using DISM. Supports
+              predefined profiles (Standard, Developer, Kiosk) or
+              custom feature lists for enabling or disabling features.
+              Includes logging for auditing changes
+==============================================================================
+#>
+
 #Requires -Version 5.1
 <#
 .SYNOPSIS
