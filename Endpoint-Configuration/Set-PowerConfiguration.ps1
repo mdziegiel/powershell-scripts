@@ -1,3 +1,15 @@
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Set Power Configuration
+SYNOPSIS    : Configures Windows power settings based on device profile
+DESCRIPTION : Applies standardized power settings using powercfg, including
+              sleep, hibernate, display timeout, and fast startup. Supports
+              multiple profiles (Workstation, Laptop, Kiosk) to ensure
+              consistent power behavior across devices
+==============================================================================
+#>
+
 #Requires -Version 5.1
 <#
 .SYNOPSIS
