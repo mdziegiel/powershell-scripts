@@ -1,19 +1,13 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Exports last logon times for all Active Directory users in hk.lan.
-.DESCRIPTION
-    Queries all user accounts and exports last logon date, account status,
-    and key attributes. Useful for identifying stale or inactive accounts.
-.PARAMETER OutputPath
-    Path for the CSV output file. Defaults to script directory.
-.PARAMETER InactiveDays
-    Highlight users inactive for more than X days. Default is 90.
-.PARAMETER EnabledOnly
-    Switch to export only enabled accounts.
-.EXAMPLE
-    .\Get-UserLastLogonAudit.ps1
-    .\Get-UserLastLogonAudit.ps1 -InactiveDays 60 -EnabledOnly
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get User Last Logon Audit
+SYNOPSIS    : Reports last logon times for Active Directory users
+DESCRIPTION : Queries Active Directory for user accounts and exports
+              last logon date, account status, and key attributes.
+              Supports filtering for inactive users and enabled accounts
+              to assist with auditing and cleanup
+==============================================================================
 #>
 
 [CmdletBinding()]
