@@ -9,7 +9,6 @@ DESCRIPTION : Retrieves the BitLocker recovery key protector ID for the
 ==============================================================================
 #>
 
-
 try{
 $BLV = Get-BitLockerVolume -MountPoint $env:SystemDrive
         $KeyProtectorID=""
