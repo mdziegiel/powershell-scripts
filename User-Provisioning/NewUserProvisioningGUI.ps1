@@ -1,13 +1,26 @@
 <#
 ==============================================================================
-  AUTHOR: Michael Dziegiel
-  DATE  : 2025/08/18
-  UPDATED: 2026/02/19 - WPF GUI version
+AUTHOR      : Michael Dziegiel
+SCRIPT      : New User Provisioning - GUI Version
+SYNOPSIS    : Creates AD users, syncs to Entra ID, and assigns M365 licenses
+DESCRIPTION : WPF form replaces all Read-Host prompts. Creates AD user,
+              syncs to Entra ID, sets UsageLocation, assigns M365 license.
+              Live progress log displayed in-window. Logs written to .\Logs\
 
-  Script: New User Provisioning - GUI Version
-  Scope : WPF form replaces all Read-Host prompts. Creates AD user,
-          syncs to Entra ID, sets UsageLocation, assigns M365 license.
-          Live progress log displayed in-window. Logs written to .\Logs\
+ORGANIZATION: <ORGANIZATION_NAME>
+
+NOTES       : This script has been sanitized for public/shared use.
+              Replace the placeholders below with values for your environment:
+
+              <ORGANIZATION_NAME>      = Company or organization name
+              <UPN_SUFFIX>             = UPN suffix (example: @contoso.com)
+              <OU_DISTINGUISHED_NAME>  = Full AD OU distinguished name
+              <AD_SEARCH_BASE>         = AD search base, if later added
+              <SITE_NAME_1>            = Primary site name
+              <SITE_NAME_2>            = Secondary site name
+
+              No production credentials, internal domains, or private OU
+              structure are included in this version.
 ==============================================================================
 #>
 
@@ -29,7 +42,7 @@ $InitialSyncWaitSeconds         = 300
 $UserDiscoveryRetryCount        = 60
 $UserDiscoveryRetryDelaySeconds = 30
 $LogRetentionDays               = 90
-$UPNSuffix                      = "@hanskissle.com"
+$UPNSuffix                      = "@<UPN_SUFFIX>"
 
 $ScriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $PSCommandPath }
 $LogDir    = Join-Path $ScriptDir 'Logs'
@@ -45,23 +58,23 @@ $Timestamp = Get-Date -Format 'yyyyMMdd_HHmmss'
 $LogPath   = Join-Path $LogDir ("NewUserProvisioning_{0}.log" -f $Timestamp)
 
 $OUs = @(
-    "OU=Accounting,OU=Administration,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Customer Service,OU=Administration,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Human Resources,OU=Administration,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Information Technology,OU=Administration,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Purchasing,OU=Administration,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=R&D,OU=Administration,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Sales,OU=Administration,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Maintenance,OU=Production,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Production,OU=Production,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Quality Control,OU=Production,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Receiving,OU=Production,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Shipping,OU=Production,OU=Employees,OU=Hans Kissle North,DC=hk,DC=lan",
-    "OU=Maintenance,OU=Users,OU=Hans Kissle South-Dallas,DC=hk,DC=lan",
-    "OU=Office,OU=Users,OU=Hans Kissle South-Dallas,DC=hk,DC=lan",
-    "OU=Production,OU=Users,OU=Hans Kissle South-Dallas,DC=hk,DC=lan",
-    "OU=Quality Control,OU=Users,OU=Hans Kissle South-Dallas,DC=hk,DC=lan",
-    "OU=Ship-Rec,OU=Users,OU=Hans Kissle South-Dallas,DC=hk,DC=lan"
+    "<OU_DISTINGUISHED_NAME_1>",
+    "<OU_DISTINGUISHED_NAME_2>",
+    "<OU_DISTINGUISHED_NAME_3>",
+    "<OU_DISTINGUISHED_NAME_4>",
+    "<OU_DISTINGUISHED_NAME_5>",
+    "<OU_DISTINGUISHED_NAME_6>",
+    "<OU_DISTINGUISHED_NAME_7>",
+    "<OU_DISTINGUISHED_NAME_8>",
+    "<OU_DISTINGUISHED_NAME_9>",
+    "<OU_DISTINGUISHED_NAME_10>",
+    "<OU_DISTINGUISHED_NAME_11>",
+    "<OU_DISTINGUISHED_NAME_12>",
+    "<OU_DISTINGUISHED_NAME_13>",
+    "<OU_DISTINGUISHED_NAME_14>",
+    "<OU_DISTINGUISHED_NAME_15>",
+    "<OU_DISTINGUISHED_NAME_16>",
+    "<OU_DISTINGUISHED_NAME_17>"
 )
 
 function Get-OUFriendlyName {
@@ -74,7 +87,7 @@ function Get-OUFriendlyName {
 <Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="New User Provisioning - Hans Kissle"
+    Title="New User Provisioning - <ORGANIZATION_NAME>"
     Height="820" Width="780"
     MinHeight="820" MinWidth="780"
     WindowStartupLocation="CenterScreen"
@@ -234,7 +247,7 @@ function Get-OUFriendlyName {
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
             <TextBlock Text="New User Provisioning" FontSize="20" FontWeight="Bold"
                        Foreground="#89B4FA" Margin="0,0,0,4"/>
-            <TextBlock Text="Hans Kissle - Active Directory + Microsoft 365"
+            <TextBlock Text="<ORGANIZATION_NAME> - Active Directory + Microsoft 365"
                        FontSize="12" Foreground="#6C7086"/>
             <Separator Background="#45475A" Margin="0,10,0,0"/>
         </StackPanel>
@@ -406,7 +419,6 @@ $lblStatus            = $Window.FindName('lblStatus')
 $script:SelectedManagerDN   = $null
 $script:SelectedManagerName = $null
 
-# --- Populate OU dropdown (hardcoded list matching original script) ---
 foreach ($ou in $OUs) {
     $item         = New-Object System.Windows.Controls.ComboBoxItem
     $item.Content = Get-OUFriendlyName $ou
@@ -611,13 +623,13 @@ $btnProvision.Add_Click({
                 Enabled           = $true
             }
             if ($Description) { $splat.Description  = $Description }
-            if ($Phone)        { $splat.OfficePhone  = $Phone }
-            if ($Email)        { $splat.EmailAddress = $Email }
-            if ($Office)       { $splat.Office       = $Office }
-            if ($Title)        { $splat.Title        = $Title }
-            if ($Department)   { $splat.Department   = $Department }
-            if ($Company)      { $splat.Company      = $Company }
-            if ($ManagerDN)    { $splat.Manager      = $ManagerDN }
+            if ($Phone)       { $splat.OfficePhone  = $Phone }
+            if ($Email)       { $splat.EmailAddress = $Email }
+            if ($Office)      { $splat.Office       = $Office }
+            if ($Title)       { $splat.Title        = $Title }
+            if ($Department)  { $splat.Department   = $Department }
+            if ($Company)     { $splat.Company      = $Company }
+            if ($ManagerDN)   { $splat.Manager      = $ManagerDN }
 
             New-ADUser @splat -PassThru | Enable-ADAccount | Out-Null
             AppendLog SUCCESS "User $UPN created in AD and enabled."
