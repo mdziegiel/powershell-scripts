@@ -1,18 +1,13 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Exports all Microsoft 365 licensed users and their assigned licenses.
-.DESCRIPTION
-    Connects to Microsoft Graph and exports all users with M365 licenses,
-    including license SKU names, account status, and last sign-in time.
-    Useful for license audits and cost reviews.
-.PARAMETER OutputPath
-    Path for the CSV output file. Defaults to script directory.
-.PARAMETER LicensedOnly
-    Switch to export only users who have at least one license assigned. Default: true.
-.EXAMPLE
-    .\Get-M365LicensedUsers.ps1
-    .\Get-M365LicensedUsers.ps1 -OutputPath "C:\Reports"
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get M365 Licensed Users
+SYNOPSIS    : Reports Microsoft 365 licensed users and assigned licenses
+DESCRIPTION : Connects to Microsoft Graph and exports users with assigned
+              Microsoft 365 licenses, including license details, account
+              status, and sign-in information. Useful for license auditing
+              and cost analysis
+==============================================================================
 #>
 
 [CmdletBinding()]
