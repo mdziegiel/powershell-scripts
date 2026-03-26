@@ -1,20 +1,13 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Audits BitLocker encryption status across all domain-joined computers in hk.lan.
-.DESCRIPTION
-    Queries all AD computers remotely for BitLocker status on all drives.
-    Identifies unencrypted or partially encrypted machines for remediation.
-.PARAMETER OutputPath
-    Path for the CSV output file. Defaults to script directory.
-.PARAMETER OUFilter
-    Optional OU to scope the computer search (DistinguishedName format).
-.PARAMETER UnprotectedOnly
-    Switch to only report drives that are NOT fully encrypted.
-.EXAMPLE
-    .\Get-BitLockerAudit.ps1
-    .\Get-BitLockerAudit.ps1 -UnprotectedOnly
-    .\Get-BitLockerAudit.ps1 -OUFilter "OU=Workstations,DC=hk,DC=lan" -UnprotectedOnly
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get BitLocker Audit
+SYNOPSIS    : Audits BitLocker encryption status across domain computers
+DESCRIPTION : Queries Active Directory computers remotely to collect
+              BitLocker encryption status for all drives. Identifies
+              unencrypted or partially encrypted systems for remediation
+              and exports results for reporting
+==============================================================================
 #>
 
 [CmdletBinding()]
