@@ -1,13 +1,13 @@
 <#
-==========================================================================
-  AUTHOR: Michael Dziegiel
-  DATE  : 2023/12/13
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Remove uniFLOW Print Server
+SYNOPSIS    : Removes gidbos89 printer connections
+DESCRIPTION : Finds and removes any printers matching gidbos89 from
+              the local system
 
-  Script: BostonuniFlowRemoval.ps1
-
-  Scope: Removes gidbos89 Print Server
- 
-==========================================================================
+ORGANIZATION: GID
+==============================================================================
 #>
 
 $PrinterObj = Get-Printer | where {$_.Name -like "*gidbos89*"} 
