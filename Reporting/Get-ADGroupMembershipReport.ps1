@@ -1,3 +1,14 @@
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get AD Group Membership Report
+SYNOPSIS    : Exports Active Directory group memberships
+DESCRIPTION : Generates a CSV report of Active Directory group memberships
+              for all users or a specific group. Supports per-user output
+              and is useful for access reviews, auditing, and offboarding
+==============================================================================
+#>
+
 #Requires -Version 5.1
 <#
 .SYNOPSIS
