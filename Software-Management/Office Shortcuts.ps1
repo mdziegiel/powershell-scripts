@@ -1,3 +1,14 @@
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Office Shortcuts
+SYNOPSIS    : Creates desktop shortcuts for Microsoft Office applications
+DESCRIPTION : Creates public desktop shortcuts for common Microsoft Office
+              applications including Word, Excel, Outlook, and PowerPoint
+              using COM objects
+==============================================================================
+#>
+
 $TargetFile = "C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE"
 $ShortcutFile = "$env:Public\Desktop\Word.lnk"
 $WScriptShell = New-Object -ComObject WScript.Shell
