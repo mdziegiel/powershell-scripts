@@ -1,25 +1,20 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Offboards a user from Hans Kissle - disables AD account, revokes M365 license,
-    moves to disabled OU, and clears group memberships.
-.DESCRIPTION
-    Full offboarding workflow:
-    - Disables the AD account
-    - Clears the manager field
-    - Removes all AD group memberships (except Domain Users)
-    - Moves account to the Disabled Users OU
-    - Revokes all M365 licenses via Microsoft Graph
-    - Logs all actions taken
-.PARAMETER SamAccountName
-    The SamAccountName of the user to offboard.
-.PARAMETER DisabledOU
-    DistinguishedName of the OU to move disabled accounts to.
-.PARAMETER OutputPath
-    Path for the log file. Defaults to script directory.
-.EXAMPLE
-    .\Invoke-UserOffboarding.ps1 -SamAccountName "jsmith"
-    .\Invoke-UserOffboarding.ps1 -SamAccountName "jsmith" -DisabledOU "OU=Disabled,DC=hk,DC=lan"
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Invoke-UserOffboarding.ps1
+SYNOPSIS    : Offboards a user from Hans Kissle
+DESCRIPTION : Disables the AD account, clears the manager field, removes
+              group memberships except Domain Users, moves the account to
+              the disabled users OU, revokes Microsoft 365 licenses via
+              Microsoft Graph, and logs all actions taken.
+PARAMETER   : SamAccountName - The SamAccountName of the user to offboard
+PARAMETER   : DisabledOU     - DistinguishedName of the OU to move the user to
+PARAMETER   : OutputPath     - Path for the log file output
+EXAMPLE     : .\Invoke-UserOffboarding.ps1 -SamAccountName "jsmith"
+EXAMPLE     : .\Invoke-UserOffboarding.ps1 -SamAccountName "jsmith" -DisabledOU "OU=Disabled,DC=hk,DC=lan"
+==============================================================================
+
+ORGANIZATION: Hanskissle
 #>
 
 [CmdletBinding(SupportsShouldProcess)]
