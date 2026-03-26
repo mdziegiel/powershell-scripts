@@ -1,13 +1,13 @@
 <#
-==========================================================================
-  AUTHOR: Michael Dziegiel
-  DATE  : 2023/12/13
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Boston Canon Printer Removal
+SYNOPSIS    : Removes Canon printers in the Boston office
+DESCRIPTION : Identifies and removes Canon printer objects associated
+              with the Boston office from the local system
 
-  Script: BostonCanonRemoval.ps1
-
-  Scope: Removal of Canon Printers in the Boston Office
- 
-==========================================================================
+ORGANIZATION: GID
+==============================================================================
 #>
 
 $PrinterObj = Get-Printer | where {$_.portname -like "*10.103.1.222*"}
