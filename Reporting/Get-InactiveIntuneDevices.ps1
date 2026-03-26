@@ -1,18 +1,12 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Reports all Intune-managed devices not seen for X days.
-.DESCRIPTION
-    Connects to Microsoft Graph and exports devices that haven't checked in
-    within the specified number of days. Useful for identifying stale or
-    abandoned endpoints that may need cleanup or follow-up.
-.PARAMETER DaysInactive
-    Number of days since last sync to flag a device. Default is 30.
-.PARAMETER OutputPath
-    Path for the CSV output file. Defaults to script directory.
-.EXAMPLE
-    .\Get-InactiveIntuneDevices.ps1
-    .\Get-InactiveIntuneDevices.ps1 -DaysInactive 60 -OutputPath "C:\Reports"
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get Inactive Intune Devices
+SYNOPSIS    : Reports inactive Intune-managed devices
+DESCRIPTION : Connects to Microsoft Graph and identifies devices that have
+              not checked in within a specified number of days. Outputs
+              results to a CSV for auditing, cleanup, and follow-up actions
+==============================================================================
 #>
 
 [CmdletBinding()]
