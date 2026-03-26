@@ -1,17 +1,13 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Audits local Administrators group membership across all domain-joined computers.
-.DESCRIPTION
-    Pulls all computer accounts from hk.lan Active Directory, connects to each machine
-    remotely, and enumerates the local Administrators group. Outputs results to CSV.
-.PARAMETER OutputPath
-    Path for the CSV output file. Defaults to script directory.
-.PARAMETER OUFilter
-    Optional OU to scope the computer search (DistinguishedName format).
-.EXAMPLE
-    .\Get-LocalAdminAudit.ps1
-    .\Get-LocalAdminAudit.ps1 -OutputPath "C:\Reports" -OUFilter "OU=Workstations,DC=hk,DC=lan"
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get Local Administrator Audit
+SYNOPSIS    : Audits local Administrators group membership across devices
+DESCRIPTION : Queries Active Directory for domain-joined computers and
+              remotely enumerates the local Administrators group on each
+              system. Exports results to CSV for auditing and security
+              review purposes
+==============================================================================
 #>
 
 [CmdletBinding()]
