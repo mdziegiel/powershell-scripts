@@ -1,3 +1,16 @@
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get Share Permission Audit
+SYNOPSIS    : Audits NTFS permissions on a network share and subfolders
+DESCRIPTION : Recursively enumerates folders under a specified UNC path
+              and reports identity, account type, access rights,
+              allow/deny status, inheritance, and whether permissions
+              are explicitly set or inherited. Supports optional CSV
+              export and configurable recursion depth
+==============================================================================
+#>
+
 #Requires -Version 5.1
 <#
 .SYNOPSIS
