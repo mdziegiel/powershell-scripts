@@ -1,17 +1,13 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Audits disabled user accounts in Active Directory (hk.lan).
-.DESCRIPTION
-    Exports all disabled user accounts with last logon, OU location, and group memberships.
-    Useful for identifying stale accounts that should be cleaned up or reviewed.
-.PARAMETER OutputPath
-    Path for the CSV output file. Defaults to script directory.
-.PARAMETER DaysSinceLogon
-    Filter to only show accounts not logged in for X days. Default is 0 (all disabled accounts).
-.EXAMPLE
-    .\Get-DisabledAccountAudit.ps1
-    .\Get-DisabledAccountAudit.ps1 -OutputPath "C:\Reports" -DaysSinceLogon 90
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Get Disabled Account Audit
+SYNOPSIS    : Reports disabled Active Directory user accounts
+DESCRIPTION : Exports disabled user accounts from Active Directory,
+              including last logon time, OU location, and group
+              memberships. Supports filtering by days since last
+              logon for identifying stale accounts
+==============================================================================
 #>
 
 [CmdletBinding()]
