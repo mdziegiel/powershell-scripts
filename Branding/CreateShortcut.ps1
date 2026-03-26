@@ -1,7 +1,12 @@
-<# 
-CreateShortcut.ps1
-Creates Measure.lnk on Public Desktop and drops a marker file so Intune detects it.
-Designed to run as SYSTEM during Autopilot ESP.
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Create Shortcut (Measure)
+SYNOPSIS    : Creates Measure shortcut and detection marker for Intune
+DESCRIPTION : Creates Measure.lnk on the Public Desktop and generates a
+              marker file used for Intune detection. Designed to run
+              under SYSTEM context during Autopilot ESP provisioning
+==============================================================================
 #>
 
 $ErrorActionPreference = 'Stop'
