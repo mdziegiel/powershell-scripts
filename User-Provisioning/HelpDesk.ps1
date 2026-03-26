@@ -1,4 +1,16 @@
-﻿rm -r c:\URLIcon
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : HelpDesk.ps1
+SYNOPSIS    : Creates a HelpDesk desktop shortcut with custom icon
+DESCRIPTION : Downloads a custom .ico file, creates a local folder to store it,
+              and adds a HelpDesk shortcut to the Public Desktop using the icon.
+==============================================================================
+
+ORGANIZATION: Hanskissle
+#>
+ 
+ rm -r c:\URLIcon
 del "C:\Users\Public\Desktop\HelpDesk.lnk"
 
 #Variables creating local folder and download .ico file
