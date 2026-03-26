@@ -1,3 +1,15 @@
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Set DNS Suffix Search List
+SYNOPSIS    : Configures the DNS suffix search list on the local machine
+DESCRIPTION : Sets the DNS suffix search list in the registry and on all
+              active network adapters. Useful for Entra-joined or workgroup
+              devices that need to resolve internal resources without
+              requiring fully qualified domain names
+==============================================================================
+#>
+
 #Requires -Version 5.1
 <#
 .SYNOPSIS
