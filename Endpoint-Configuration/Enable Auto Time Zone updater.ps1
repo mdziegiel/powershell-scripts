@@ -1,4 +1,14 @@
-# Ensure required services for location-based time zone + time sync
+<#
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Configure Time Sync and Time Zone Services
+SYNOPSIS    : Ensures time sync and location-based time zone services are running
+DESCRIPTION : Sets required Windows services (lfsvc, tzautoupdate, w32time)
+              to Automatic and starts them if needed. Repairs the Windows
+              Time service if misconfigured and forces a time resync
+==============================================================================
+#>
+
 Set-Service lfsvc -StartupType Automatic
 Set-Service tzautoupdate -StartupType Automatic
 Set-Service w32time -StartupType Automatic
