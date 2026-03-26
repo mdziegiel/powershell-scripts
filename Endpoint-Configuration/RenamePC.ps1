@@ -1,24 +1,16 @@
 <#
+.AUTHOR
+    Michael Dziegiel
+
+.SCRIPT
+    RenamePC
+
 .SYNOPSIS
-    --.Replace "This PC" icon name with the actual name of the PC
+    Replace "This PC" icon name with the actual name of the PC
+
 .DESCRIPTION
     This script takes ownership of the registry value HKEY_CLASSES_ROOT\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}
     It then updates the key name to $env:ComputerName & The LocalizedName as well
-
-.INPUTS
-    None.
-.OUTPUTS
-    None.
-.NOTES
-    Created by @gwblok
-.LINK
-    https://garytown.com
-.LINK
-    https://www.recastsoftware.com
-.COMPONENT
-    --
-.FUNCTIONALITY
-    --
 #>
 
 ## Set script requirements
