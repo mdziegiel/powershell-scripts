@@ -1,23 +1,21 @@
-#Requires -Version 5.1
 <#
-.SYNOPSIS
-    Resets an Active Directory user password and forces change at next logon.
-.DESCRIPTION
-    Resets a user's AD password, unlocks the account if locked, and sets the
-    must-change-password flag. Optionally generates a random password if none
-    is provided. Logs all actions taken.
-.PARAMETER SamAccountName
-    The SamAccountName of the user to reset.
-.PARAMETER NewPassword
-    The new password to set. If omitted, a random 12-character password is generated.
-.PARAMETER NoForceChange
-    Switch to skip forcing a password change at next logon.
-.PARAMETER OutputPath
-    Path for the log file. Defaults to script directory.
-.EXAMPLE
-    .\Reset-UserPassword.ps1 -SamAccountName "jsmith"
-    .\Reset-UserPassword.ps1 -SamAccountName "jsmith" -NewPassword "TempP@ss123!"
-    .\Reset-UserPassword.ps1 -SamAccountName "jsmith" -NoForceChange
+==============================================================================
+AUTHOR      : Michael Dziegiel
+SCRIPT      : Reset-UserPassword.ps1
+SYNOPSIS    : Resets an Active Directory user password
+DESCRIPTION : Resets a user's AD password, unlocks the account if locked,
+              and forces a password change at next logon. Can generate a
+              random password if one is not provided. Logs all actions taken.
+PARAMETER   : SamAccountName - The SamAccountName of the user to reset
+PARAMETER   : NewPassword    - The new password to set (optional)
+PARAMETER   : NoForceChange  - Skips forcing password change at next logon
+PARAMETER   : OutputPath     - Path for the log file output
+EXAMPLE     : .\Reset-UserPassword.ps1 -SamAccountName "jsmith"
+EXAMPLE     : .\Reset-UserPassword.ps1 -SamAccountName "jsmith" -NewPassword "TempP@ss123!"
+EXAMPLE     : .\Reset-UserPassword.ps1 -SamAccountName "jsmith" -NoForceChange
+==============================================================================
+
+ORGANIZATION: Hanskissle
 #>
 
 [CmdletBinding()]
