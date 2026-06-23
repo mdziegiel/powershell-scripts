@@ -16,21 +16,21 @@ DESCRIPTION : Sets the DNS suffix search list in the registry and on all
     Configures the DNS suffix search list on the local machine.
 .DESCRIPTION
     Sets the DNS suffix search list in the registry and on all active network adapters.
-    Useful for Entra-joined or workgroup machines that need to resolve hk.lan resources
+    Useful for Entra-joined or workgroup machines that need to resolve yourdomain.local resources
     without typing the full FQDN.
 .PARAMETER Suffixes
-    Array of DNS suffixes to set. Defaults to hk.lan suffixes.
+    Array of DNS suffixes to set. Defaults to yourdomain.local suffixes.
 .PARAMETER Append
     Switch to append suffixes to the existing list instead of replacing it.
 .EXAMPLE
     .\Set-DNSSuffixSearchList.ps1
-    .\Set-DNSSuffixSearchList.ps1 -Suffixes "hk.lan","corp.hk.lan"
-    .\Set-DNSSuffixSearchList.ps1 -Suffixes "hk.lan" -Append
+    .\Set-DNSSuffixSearchList.ps1 -Suffixes "yourdomain.local","corp.yourdomain.local"
+    .\Set-DNSSuffixSearchList.ps1 -Suffixes "yourdomain.local" -Append
 #>
 
 [CmdletBinding()]
 param(
-    [string[]]$Suffixes = @("hk.lan", "corp.hk.lan"),
+    [string[]]$Suffixes = @("yourdomain.local", "corp.yourdomain.local"),
     [switch]$Append
 )
 

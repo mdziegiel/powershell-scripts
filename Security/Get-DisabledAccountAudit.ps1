@@ -19,7 +19,7 @@ param(
 $Timestamp = Get-Date -Format "yyyy-MM-dd_HHmm"
 $ReportPath = Join-Path $OutputPath "DisabledAccountAudit_$Timestamp.csv"
 
-Write-Host "Querying disabled accounts in hk.lan..." -ForegroundColor Cyan
+Write-Host "Querying disabled accounts in yourdomain.local..." -ForegroundColor Cyan
 
 $Users = Get-ADUser -Filter { Enabled -eq $false } -Properties `
     DisplayName, SamAccountName, UserPrincipalName, DistinguishedName,

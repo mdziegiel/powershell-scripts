@@ -21,7 +21,7 @@ $Timestamp = Get-Date -Format "yyyy-MM-dd_HHmm"
 $ReportPath = Join-Path $OutputPath "UserLastLogonAudit_$Timestamp.csv"
 $InactiveThreshold = (Get-Date).AddDays(-$InactiveDays)
 
-Write-Host "Querying all user accounts in hk.lan..." -ForegroundColor Cyan
+Write-Host "Querying all user accounts in yourdomain.local..." -ForegroundColor Cyan
 
 $Filter = if ($EnabledOnly) { { Enabled -eq $true } } else { "*" }
 

@@ -14,7 +14,7 @@ DESCRIPTION : Generates a CSV report of Active Directory group memberships
 .SYNOPSIS
     Exports Active Directory group memberships for all users or a specific group.
 .DESCRIPTION
-    Generates a flat CSV of group memberships in hk.lan. Can run against all groups,
+    Generates a flat CSV of group memberships in yourdomain.local. Can run against all groups,
     a specific group, or export a per-user view of all group memberships.
     Useful for access reviews and offboarding audits.
 .PARAMETER GroupName
