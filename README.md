@@ -44,8 +44,8 @@ Scripts for installing, configuring, and removing software.
 | Script | Description |
 |--------|-------------|
 | `FireFoxRemoval.ps1` | Removes Mozilla Firefox |
-| `BostonCanonRemoval.ps1` | Removes Canon software |
-| `BostonuniFlowRemoval.ps1` | Removes uniFlow software |
+| `CanonRemoval.ps1` | Removes Canon software |
+| `UniFlowRemoval.ps1` | Removes uniFlow software |
 | `ScreenConnectRemoval.ps1` | Removes ScreenConnect agent |
 | `SupportAssistCleanup.ps1` | Removes Dell SupportAssist |
 | `DCU Script.ps1` | Dell Command Update configuration |
