@@ -1,12 +1,11 @@
 <#
 ==============================================================================
 AUTHOR      : Michael Dziegiel
-SCRIPT      : Boston Canon Printer Removal
-SYNOPSIS    : Removes Canon printers in the Boston office
-DESCRIPTION : Identifies and removes Canon printer objects associated
-              with the Boston office from the local system
+SCRIPT      : Canon Printer Removal
+SYNOPSIS    : Removes Canon printers
+DESCRIPTION : Identifies and removes Canon printer objects
 
-ORGANIZATION: GID
+ORGANIZATION: 
 ==============================================================================
 #>
 
