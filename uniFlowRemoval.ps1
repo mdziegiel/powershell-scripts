@@ -2,13 +2,13 @@
 ==============================================================================
 AUTHOR      : Michael Dziegiel
 SCRIPT      : Remove uniFLOW Print Server
-SYNOPSIS    : Removes gidbos89 printer connections
-DESCRIPTION : Finds and removes any printers matching gidbos89 from
+SYNOPSIS    : Removes uniFLOW printer connections
+DESCRIPTION : Finds and removes any printers matching "servername" from
               the local system
 
-ORGANIZATION: GID
+ORGANIZATION: 
 ==============================================================================
 #>
 
-$PrinterObj = Get-Printer | where {$_.Name -like "*gidbos89*"} 
+$PrinterObj = Get-Printer | where {$_.Name -like "*servername*"} 
 if ($PrinterObj -ne $null) {remove-printer -inputobject $PrinterObj }
