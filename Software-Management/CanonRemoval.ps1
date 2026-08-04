@@ -9,15 +9,15 @@ ORGANIZATION:
 ==============================================================================
 #>
 
-$PrinterObj = Get-Printer | where {$_.portname -like "*10.103.1.222*"}
+$PrinterObj = Get-Printer | where {$_.portname -like "*IPAddess*"}
 if ($PrinterObj -ne $null) {remove-printer -inputobject $PrinterObj }
-$PrinterObj = Get-Printer | where {$_.portname -like "*10.103.1.248*"} 
+$PrinterObj = Get-Printer | where {$_.portname -like "*IPAddess*"} 
 if ($PrinterObj -ne $null) {remove-printer -inputobject $PrinterObj }
-$PrinterObj = Get-Printer | where {$_.portname -like "*10.103.1.9*"} 
+$PrinterObj = Get-Printer | where {$_.portname -like "*IPAddess*"} 
 if ($PrinterObj -ne $null) {remove-printer -inputobject $PrinterObj }
-$PrinterObj = Get-Printer | where {$_.portname -like "*10.103.1.11*"} 
+$PrinterObj = Get-Printer | where {$_.portname -like "*IPAddess*"} 
 if ($PrinterObj -ne $null) {remove-printer -inputobject $PrinterObj }
-$PrinterObj = Get-Printer | where {$_.portname -like "*10.103.1.8*"} 
+$PrinterObj = Get-Printer | where {$_.portname -like "*IPAddess*"} 
 if ($PrinterObj -ne $null) {remove-printer -inputobject $PrinterObj }
-$PrinterObj = Get-Printer | where {$_.portname -like "*10.103.1.46*"} 
+$PrinterObj = Get-Printer | where {$_.portname -like "*IPAddess*"} 
 if ($PrinterObj -ne $null) {remove-printer -inputobject $PrinterObj }
