@@ -1,0 +1,35 @@
+<#
+==============================================================================
+AUTHOR : Michael Dziegiel
+SCRIPT : Get Entra Application and SSO Report
+SYNOPSIS : Exports Entra Enterprise Application and SSO inventory reports
+DESCRIPTION : Exports Microsoft Entra Enterprise Application and SSO reports
+NOTES : Requires Microsoft Graph PowerShell and permissions for Application. 
+Read.All and Directory.Read.All. Usage/sign-in activity requires additional audit permissions.
+==============================================================================
+#>
+
+Connect-MgGraph -Scopes "Application.Read.All","Directory.Read.All","Mail.Send" -NoWelcome
+
+$OutputFolder = "C:\Temp\EntraReports"
+New-Item -ItemType Directory -Path $OutputFolder -Force | Out-Null
+
+$Date = Get-Date -Format "yyyy-MM-dd"
+
+$AllApps = Get-MgServicePrincipal -All |
+    Select-Object DisplayName,AppId,PreferredSingleSignOnMode
+
+$AllFile = Join-Path $OutputFolder "Entra_EnterpriseApps_All_$Date.csv"
+$SSOFile = Join-Path $OutputFolder "Entra_SSO_Apps_Only_$Date.csv"
+
+$AllApps |
+    Sort-Object DisplayName |
+    Export-Csv $AllFile -NoTypeInformation -Encoding UTF8
+
+$AllApps |
+    Sort-Object DisplayName |
+    Export-Csv $SSOFile -NoTypeInformation -Encoding UTF8
+
+Write-Host "Reports created:"
+Write-Host $AllFile
+Write-Host $SSOFile
