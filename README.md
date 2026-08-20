@@ -1,6 +1,6 @@
 # PowerShell Scripts
 
-PowerShell scripts for endpoint management, automation, and system configuration.
+PowerShell scripts for endpoint management, automation, reporting, and system configuration.
 
 ---
 
@@ -11,12 +11,14 @@ Scripts for user account management and lifecycle.
 
 | Script | Description |
 |--------|-------------|
-| `NewUserProvisioning.ps1` | Creates new AD users and assigns M365 licenses |
-| `Invoke-UserOffboarding.ps1` | Disables account, removes groups, revokes M365 licenses, moves to disabled OU |
-| `Reset-UserPassword.ps1` | Resets password, unlocks account, forces change at next logon |
-| `HelpDesk.ps1` | HelpDesk account provisioning |
-| `New-LocalAdminAccount.ps1` | Local admin account setup |
-| `RemediateLocalUser.ps1` | Remediates local user account issues |
+| `Add-ContactToAD.ps1` | Adds a contact to Active Directory |
+| `Create-ContactsOnAD.ps1` | Creates contacts in Active Directory |
+| `HelpDesk.ps1` | Downloads a custom .ico file, creates a local folder to store it, and adds a HelpDesk shortcut to the Public Desktop using the icon. |
+| `Invoke-UserOffboarding.ps1` | Disables the AD account, clears the manager field, removes group memberships except Domain Users, moves the account to the disabled users OU, revokes Microsoft 365 licenses via Microsoft Graph, and logs all actions taken. |
+| `Local_Admin_Script_Name.ps1` | Creates a local administrator account, sets the password to never expire, and adds the account to the local Administrators group |
+| `New-LocalAdminAccount.ps1` | Creates new local admin account and adds to Administrators group |
+| `NewUserProvisioningGUI.ps1` | WPF form replaces all Read-Host prompts |
+| `Reset-UserPassword.ps1` | Resets a user's AD password, unlocks the account if locked, and forces a password change at next logon |
 
 ---
 
@@ -25,16 +27,19 @@ Scripts for configuring and standardizing Windows endpoints.
 
 | Script | Description |
 |--------|-------------|
-| `RenamePC.ps1` | Renames the PC and updates the This PC icon |
-| `RenamePC_With_Usersfiles.ps1` | Renames PC and enables User Files desktop icon |
-| `AlignWindows11taskbarleft.ps1` | Aligns Windows 11 taskbar to the left |
-| `Set-DNSSuffixSearchList.ps1` | Configures DNS suffix search list |
-| `Set-PowerConfiguration.ps1` | Applies power settings profile |
-| `Set-WindowsFeatures.ps1` | Enables or disables Windows optional features |
-| `Enable Auto Time Zone updater.ps1` | Enables automatic time zone detection |
-| `Remove 260 Character Path Limit.ps1` | Removes the 260 character path length limit |
-| `DisableWindowsFirewallProfiles.ps1` | Disables firewall profiles (if required) |
-| `DriveMapping.ps1` | Maps network drives |
+| `AlignWindows11taskbarleft.ps1` | Configures the registry value 'TaskbarAl' under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced to 0, which aligns the taskbar to the left for the current user |
+| `Disable Windows Firewall Profiles.ps1` | Disables Domain, Private, and Public firewall profiles |
+| `DriveMapping.ps1` | Performs network drive mappings with PowerShell |
+| `Enable Auto Time Zone updater.ps1` | Sets required Windows services (lfsvc, tzautoupdate, w32time) to Automatic and starts them if needed |
+| `poweroff.ps1` | This script halts the local computer immediately (needs admin rights). |
+| `reboot.ps1` | This PowerShell script reboots the local computer immediately (needs admin rights). |
+| `Remove 260 Character Path Limit.ps1` | Remove 260 Character Path Limit |
+| `RenamePC.ps1` | Takes ownership of the registry key for "This PC" and updates both the default value and LocalizedName to match the current computer name using $env:COMPUTERNAME |
+| `RenamePC_With_Usersfiles.ps1` | Modifies the CLSID registry key for "This PC" by taking ownership and updating the display name and LocalizedName values to reflect the current hostname ($env:COMPUTERNAME) |
+| `Set-DNSSuffixSearchList.ps1` | Sets the DNS suffix search list in the registry and on all active network adapters |
+| `Set-PowerConfiguration.ps1` | Applies standardized power settings using powercfg, including sleep, hibernate, display timeout, and fast startup |
+| `Set-WindowsFeatures.ps1` | Manages Windows optional features using DISM |
+| `wake-up-host.ps1` | This PowerShell script sends a magic UDP packet to a computer to wake him up (requires the target computer to have Wake-on-LAN activated). |
 
 ---
 
@@ -43,13 +48,33 @@ Scripts for installing, configuring, and removing software.
 
 | Script | Description |
 |--------|-------------|
-| `FireFoxRemoval.ps1` | Removes Mozilla Firefox |
-| `CanonRemoval.ps1` | Removes Canon software |
-| `ScreenConnectRemoval.ps1` | Removes ScreenConnect agent |
-| `SupportAssistCleanup.ps1` | Removes Dell SupportAssist |
-| `DCU Script.ps1` | Dell Command Update configuration |
-| `Office Shortcuts.ps1` | Creates Office application shortcuts |
-| `Launch OneDrive.ps1` | Launches and configures OneDrive |
+| `Analyze-WindowsStartup.ps1` | Audit startup apps, services, and scheduled tasks |
+| `Bitlocker_Sync.ps1` | Retrieves the BitLocker recovery key protector ID for the system drive and backs it up to Azure AD (Entra ID) |
+| `CanonRemoval.ps1` | Identifies and removes Canon printer objects |
+| `check-drive-space.ps1` | This PowerShell script checks the given drive for free space left (10 GB by default). |
+| `check-health.ps1` | This PowerShell script queries the system health of the local computer (hardware, software, and network) and prints it. |
+| `DCU Script.ps1` | Configures Dell Command Update via registry and CLI, including update scheduling and system behavior |
+| `FireFoxRemoval.ps1` | Removal of Firefox browser |
+| `Install-7Zip.ps1` | Winget wrapper to install 7-Zip |
+| `Install-AdobeReader.ps1` | Winget wrapper to install Adobe Acrobat Reader |
+| `install-basic-apps.ps1` | This PowerShell script installs basic Windows apps such as browser, e-mail client, etc |
+| `install-chrome.ps1` | This PowerShell script installs the Google Chrome browser from WinGet. |
+| `Install-Chrome.ps1` | Winget wrapper to install Google Chrome |
+| `install-firefox.ps1` | This PowerShell script installs the Mozilla Firefox browser from Microsoft Store. |
+| `Install-Firefox.ps1` | Winget wrapper to install Mozilla Firefox |
+| `install-git-for-windows.ps1` | This PowerShell script installs Git for Windows. |
+| `install-github-cli.ps1` | This PowerShell script installs the GitHub command-line interface (CLI). |
+| `install-ssh-client.ps1` | This PowerShell script installs a SSH client (needs admin rights). |
+| `install-ssh-server.ps1` | This PowerShell script installs a SSH server (needs admin rights). |
+| `install-wsl.ps1` | This PowerShell script installs Windows Subsystem for Linux |
+| `Invoke-RemoveUnwantedApps.ps1` | Remove a few apps we don't like to have installed any longer, we use WinGet to do so |
+| `Launch Onderive.ps1` | Downloads the OneDrive installer, performs a silent all-users installation, then creates and runs a temporary scheduled task to launch OneDrive and removes the task after execution |
+| `Office Shortcuts.ps1` | Creates public desktop shortcuts for common Microsoft Office applications including Word, Excel, Outlook, and PowerPoint using COM objects |
+| `Optimize-WindowsDisk.ps1` | Audits Windows storage and optionally runs supported disk optimization and cleanup tasks. |
+| `Remove-bloatware.ps1` | Removes pre-installed Windows 10 apps and common consumer bloatware so fresh endpoints start from a cleaner baseline. |
+| `Remove-Widget.ps1` | Removes the Windows 11 Widgets / WebExperience package for existing users and removes the provisioned package for new users. |
+| `ScreenConnectRemoval.ps1` | Removal of ScreenConnect |
+| `SupportAssistCleanup.ps1` | Removes Dell SupportAssist for PCs if installed, including associated components and residual files |
 
 ---
 
@@ -58,15 +83,26 @@ Scripts for security auditing, access control, and compliance.
 
 | Script | Description |
 |--------|-------------|
-| `Get-LocalAdminAudit.ps1` | Audits local Administrators group |
-| `Get-DisabledAccountAudit.ps1` | Exports disabled AD accounts |
-| `Get-UserLastLogonAudit.ps1` | Exports last logon times |
-| `Get-BitLockerAudit.ps1` | Checks BitLocker status |
-| `Bitlocker_Sync.ps1` | Syncs BitLocker recovery keys |
-| `DisabledAdmin.ps1` | Disables local Administrator |
-| `Remove all local accounts.ps1` | Removes non-default local users |
-| `RemoveRegistryKeys.ps1` | Removes registry keys |
-| `SSTP VPN V2.ps1` | Configures VPN connection |
+| `Bitlocker_Sync.ps1` | Retrieves the BitLocker recovery key protector ID for the system drive and backs it up to Azure AD (Entra ID) |
+| `DisabledAdmin.ps1` | Checks if the local Administrator account exists and is enabled |
+| `Get-ADUserLockout.ps1` | Tracking down account lockout sources with PowerShell |
+| `Get-BitLockerAudit.ps1` | Queries Active Directory computers remotely to collect BitLocker encryption status for all drives |
+| `Get-DisabledAccountAudit.ps1` | Exports disabled user accounts from Active Directory, including last logon time, OU location, and group memberships |
+| `Get-EntraTenantReview.ps1` | Exports Entra user, admin, policy, and application reports. |
+| `Get-LocalAdminAudit.ps1` | Queries Active Directory for domain-joined computers and remotely enumerates the local Administrators group on each system |
+| `Get-UserLastLogonAudit.ps1` | Queries Active Directory for user accounts and exports last logon date, account status, and key attributes |
+| `Invoke-BackupBitlockerRecoveryKey.ps1` | Backup the BitLocker Recovery Information to the Azure Active Directory If the Boot Drive is not encrypted, the Script will try to enable the quick protection |
+| `Invoke-GPO-Win11DiscoveryWorkbook.ps1` | Invoke-GPO-Win11DiscoveryWorkbook |
+| `Invoke-Win11GPOMigrationAssessmentWorkbook.ps1` | Creates the Windows 11 GPO Migration Assessment workbook |
+| `Logon-Audit.ps1` | Audits Windows logon and logoff events from Security logs and can send the results to Microsoft Teams. |
+| `M365EnterpriseCommandCenter_v3_2.ps1` | Technician console using app-only certificate auth and direct Microsoft Graph REST calls. |
+| `M365EnterpriseOperationsCenter.ps1` | Read-only Microsoft 365 operations dashboard for monitoring tenant health, security, licensing, mail flow, and device compliance. |
+| `Remove all local accounts.ps1` | Enumerates all local user accounts and deletes any account not included in an approved allow list |
+| `Remove-AzureADInactiveDevices.ps1` | Remove all inactive AzureAD Devices Inactivity Threshold can be given |
+| `RemoveRegistryKeys.ps1` | Removal of Registry Keys WindowsUpdate WindowsUpdate\AU |
+| `Setup-M365EOC-AppOnly.ps1` | One-time setup for Microsoft 365 Enterprise Operations Center v3.0 |
+| `SSTP VPN V2.ps1` | Creates or updates a Windows VPN connection using the specified connection settings, applies DNS suffix configuration, enables split tunneling, and adds static routes for internal network access |
+| `windefender.ps1` | This script can enable / disable and show Windows defender real time monitoring! |
 
 ---
 
@@ -75,42 +111,133 @@ Scripts for reporting across systems.
 
 | Script | Description |
 |--------|-------------|
-| `Get-InactiveIntuneDevices.ps1` | Reports inactive Intune devices |
-| `Get-M365LicensedUsers.ps1` | Exports licensed users |
-| `Get-ADGroupMembershipReport.ps1` | Exports group memberships |
+| `Create-DL-Group-Report.ps1` | Connects to Exchange Online and exports a distribution list membership report to CSV. |
+| `Export-ADGroupMemberToCSV.ps1` | Lists users in an AD group and exports name, object class, and SamAccountName to CSV. |
+| `Export-AllMailboxesReport.ps1` | Retrieves mailbox details from Exchange Online, including aliases, mailbox size, full access permissions, send-as permissions, and forwarding configuration, then exports the results to CSV for reporting and audit… |
+| `Export-GPOSettings.ps1` | Exports Group Policy settings |
+| `Get-ADGroupMembershipReport.ps1` | Generates a CSV report of Active Directory group memberships for all users or a specific group |
+| `Get-AuditGuestTeams.ps1` | This Script function will create a report that will help IT PROs to Monitor and Audit Guest users |
+| `Get-ComputersToRebootAfterUpdate.ps1` | Lists AD computers with a pending reboot after Windows Update KB installation and exports them to CSV. |
+| `Get-enADForestInformation.ps1` | Retrieve information about an Active Directory Forest |
+| `Get-enMailboxPermissionReport.ps1` | Get a detailed mailbox permission report and exports this report to a given CSV file |
+| `Get-enMailboxSendAsReport.ps1` | Get a detailed mailbox Send permission report and exports this report to a given CSV file |
+| `Get-FullTeamsReport.ps1` | Connects to Microsoft Teams and exports a full report of teams, channels, and members. |
+| `Get-GraphGuestReportsInEntra.ps1` | Report the Sponsors of Entra ID Guest Accounts |
+| `Get-InactiveIntuneDevices.ps1` | Connects to Microsoft Graph and identifies devices that have not checked in within a specified number of days |
+| `Get-M365LicensedUsers.ps1` | Connects to Microsoft Graph and exports users with assigned Microsoft 365 licenses, including license details, account status, and sign-in information |
+| `Get-MailboxFolderPermissions.ps1` | Enumerates mailbox folders in a mailbox and reports users with explicit non-default, non-anonymous permissions on each folder. |
+| `Get-MailboxUsage.ps1` | Reports mailbox usage |
+| `Get-MFAUserReport.ps1` | Get a Azure AD MFA User report, the function can export the report as CSV |
+| `Get-SharedMailboxPermissions.ps1` | Connects to Exchange Online and enumerates shared mailbox permissions. |
+| `Get-SPOSiteStorageUsage.ps1` | SharePoint Online storage usage reporting |
+| `Get-TeamsChannelUsersReport.ps1` | Connects to Microsoft Graph and Microsoft Teams to report users, roles, and shared-channel membership across teams. |
+| `Invoke-GetAzureADAuditSignInLogs.ps1` | Get the AzureAD Audit Sign-In Logs and create several CSV files |
+| `List-AllMembersOfADistributionList.ps1` | Connects to Exchange Online, expands a distribution list, and prints each member’s display name and primary SMTP address. |
+| `ListADObjectsOnSelectedOU.ps1` | Lists AD objects from a graphically selected OU and exports common name and description to CSV. |
 
 ---
 
 ### Branding
-Scripts for branding and desktop configuration.
+Scripts for branding, desktop layout, and sign-in presentation.
 
 | Script | Description |
 |--------|-------------|
-| `Set-WallpaperLockscreen.ps1` | Sets wallpaper and lock screen |
-| `CreateShortcut.ps1` | Creates shortcuts |
-| `LogoPic/` | Logo assets |
-| `Fonts/` | Font files |
+| `Copy-Startmenu.ps1` | Copies a Windows 11 Start menu template to all existing user profiles and the default profile |
+| `Create_Common_Desktop_Shortcuts.ps1` | Creates a standard set of desktop shortcuts for common applications so the desktop layout stays consistent. |
+| `Create_Common_StartMenu_Shortcuts.ps1` | Creates a standard set of Start Menu shortcuts for common applications so users get a consistent launcher layout. |
+| `CreateShortcut.ps1` | Creates Measure.lnk on the Public Desktop and generates a marker file used for Intune detection |
+| `Download_Themes.ps1` | Downloads Microsoft theme packs to a local folder so wallpaper and lock screen branding assets can be distributed consistently. |
+| `Invoke-InstallCustomBGInfo.ps1` | Download an install the latest BGInfo on an internal server |
+| `MOTD.ps1` | Fetches a random quote and returns it as a message of the day for display at sign-in or in a branded console prompt. |
+| `new-shortcut.ps1` | This PowerShell script creates a new shortcut file. |
+| `set-wallpaper.ps1` | This PowerShell script sets the given image file as desktop wallpaper (.JPG or .PNG supported) |
+| `Set-WallpaperLockscreen.ps1` | Copies wallpaper.jpg to a local path, applies it as the device-level lock screen, and schedules the desktop background to be configured at the next user logon |
+| `Start-Apps.ps1` | Launches a curated set of Start Menu shortcuts and shortcuts-based app entries for quick access to standard tools. |
+
+---
+
+### Miscellaneous
+Scripts that do not fit the other categories cleanly.
+
+| Script | Description |
+|--------|-------------|
+| `Create-HyperV_VM.ps1` | Creates Hyper-V virtual machines from a CSV definition. |
+| `Delete-HyperV_VM.ps1` | Deletes Hyper-V virtual machines listed in a CSV file. |
+| `Get-SharePermissionAudit.ps1` | Recursively enumerates folders under a specified UNC path and reports identity, account type, access rights, allow/deny status, inheritance, and whether permissions are explicitly set or inherited |
+| `HealthCheck.ps1` | Checks Windows server health across hardware, software, and network basics. |
+
+---
+
+### Cloud-Administration
+Scripts for Microsoft 365, Azure, Exchange, Teams, and SharePoint administration.
+
+| Script | Description |
+|--------|-------------|
+| `Add-DelegationRights.ps1` | Adds mailbox delegation rights for Office 365 users, with or without automapping. |
+| `Add-UserToSharedMailbox.ps1` | Grants Office 365 users access to a shared mailbox, with or without automapping. |
+| `Cleanup-APIPermissions.ps1` | To enhance your tenant's security posture, it's crucial to regularly review the API permissions requested by SPFx solutions and compare them with those granted to the ”SharePoint Online Client Extensibility Web… |
+| `Export-WTCAPolicy.ps1` | Connects to Microsoft Graph and exports Conditional Access policies and related settings. |
+| `Get-Office365Endpoints.ps1` | Microsoft updates the Office 365 IP address and FQDN entries at the end of each month and occasionally out of the cycle for operational or support requirements |
+| `Get-TeamsServiceNumbers.ps1` | Get the Phone numbers assigned to Teams/SfB Services Supported are AutoAttendant and/or CallQueue |
+| `Get-WTAzureADAppSP.ps1` | Connects to Microsoft Graph and reports Azure AD or Entra application service principals. |
+| `Get-WTAzureADGroup.ps1` | Connects to Microsoft Graph and lists Azure AD or Entra groups. |
+| `Get-WTCAPolicy.ps1` | Connects to Microsoft Graph and reads Conditional Access policy details. |
+| `Move-Team.ps1` | Copies channels and files from one Team to another, with a REPORT mode for read-only comparison and an EXECUTE mode that can add members, create channels, and copy files between teams. |
+| `New-TeamMailbox.ps1` | This scripts creates a new shared mailbox (aka team mailbox) and security groups for full access and and send-as delegation |
+| `New-WTAzureADGroup.ps1` | Connects to Microsoft Graph and creates Azure AD or Entra groups. |
+| `Set-Office365Signature.ps1` | Configures an Office 365 signature for users. |
+| `Teams-Phone-User-Assignment-Phase1.ps1` | Assign voice-related Teams policies to users |
+| `Teams-Phone-User-Assignment-Phase2-Cutover.ps1` | Assign phone numbers and complete Teams phone cutover |
+| `Update-UPNandLicence.ps1` | Reads a CSV of users, updates each account’s UPN, usage location, and assigned Microsoft 365 license, and writes transcript and subject logs. |
+
+---
+
+### Intune
+Scripts for Intune, Autopilot, and device-management workflows.
+
+| Script | Description |
+|--------|-------------|
+| `Application_Get_Assign.ps1` | Authenticates to Microsoft Graph, enumerates Intune applications, and exports assignment and deployment details to a report. |
+| `Change-DeviceCategory.ps1` | Sets the device category for a single Intune device using the Microsoft Graph beta endpoint via the Intune PowerShell SDK (Connect-MSGraph). |
+| `Change-DeviceCategoryMulti.ps1` | Iterates over all managed devices and assigns a device category depending on whether the device name matches a pattern |
+| `Change-DeviceCategorySingle.ps1` | Sets the device category for one Intune device using the Microsoft Graph beta endpoint via the Intune PowerShell SDK (Connect-MSGraph). |
+| `CompliancePolicy_Export.ps1` | Authenticates to Microsoft Graph, enumerates Intune compliance policies, and exports their settings to a report for review. |
+| `Copy-DeviceConfigurationProfile.ps1` | Copy a device configuration profile in Intune |
+| `CorpDeviceEnrollment_Add.ps1` | Authenticates to Microsoft Graph and creates corporate device identifiers for Intune enrollment from a Graph- backed input list. |
+| `Detect-MultipleIntuneMDMCert.ps1` | This script checks the Local Machine certificate store for multiple Intune MDM Device CA certificates |
+| `Get-AllAssignmentsError.ps1` | Retrieves all failed configuration profile and app assignments in the tenant and exports them as CSV files |
+| `Get-AllAssignmentsErrorAppRegistration.ps1` | Retrieves all failed configuration profile and app assignments in the tenant, exports them as CSV files, and sends an email report with attachments via Microsoft Graph |
+| `Get-CleanUpDiskDetection.ps1` | Checks free space on the C: drive |
+| `Get-CleanUpDiskRemediation.ps1` | Configures selected cleanup categories in the registry and invokes CleanMgr.exe to free disk space |
+| `Get-NewEnrolledDevicesReport.ps1` | Queries Microsoft Graph for devices enrolled in the past 7 days, generates a CSV report, and sends it as an email attachment via the Graph Mail API. |
+| `Get-PendingRebootDetection.ps1` | Checks multiple registry keys to determine whether a system reboot is pending |
+| `Get-PendingRebootNotificationRemediation.ps1` | Intune Proactive Remediation script that shows a Windows toast notification prompting the user to reboot their system after updates have been installed. |
+| `Get-UnassignedAppsAndConfigurations.ps1` | Queries Microsoft Graph for all mobile apps with their assignments expanded and returns those that have no assignments configured. |
+| `Get-Windows11Report.ps1` | Connects to Microsoft Graph, retrieves all managed Windows devices, calculates Windows 11 adoption percentages, builds an HTML report with a pie chart and device table, and sends it as an email attachment. |
+| `ManagedDevices_Get.ps1` | Authenticates to Microsoft Graph and exports Intune managed device inventory and compliance details. |
+| `Repair-MultipleIntuneMDMCert.ps1` | This script removes duplicate Intune MDM Device CA certificates from the Local Machine certificate store, keeping only the most recent one |
 
 ---
 
 ## Requirements
 
 - PowerShell 5.1 or later
-- RSAT ActiveDirectory module (for AD scripts)
-- Microsoft Graph PowerShell module (for M365 scripts)
+- RSAT ActiveDirectory and Group Policy modules for AD / GPO scripts
+- Microsoft Graph PowerShell module for Microsoft 365 / Intune scripts
+- MicrosoftTeams and ExchangeOnlineManagement for cloud admin scripts
 - Administrator privileges for most scripts
 
 ---
 
-## ⚠️ Notes
+## Notes
 
-- This repository has been sanitized for public use
-- No production credentials or sensitive data are included
-- Replace placeholder values before use
+- This repository is maintained as a local script library for MRDTech operations.
+- Review scripts before production use.
+- Replace environment-specific paths, tenant names, and URLs as needed.
 
 ---
 
-## 🚀 Usage
+## Usage
 
 Run scripts with appropriate permissions.
 
@@ -122,17 +249,13 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 
 ---
 
-## 📌 Disclaimer
+## Disclaimer
 
-These scripts are provided **as-is** without any warranties, express or implied.  
+These scripts are provided as-is without any warranties, express or implied.
 Use at your own risk.
 
-The author assumes no responsibility for:
-- System damage
-- Data loss
-- Security misconfigurations
-- Production outages
-
 All scripts should be reviewed and tested in a non-production environment before deployment.
 
-All scripts should be reviewed and tested in a non-production environment before deployment.
+---
+
+_Generated from the current repository tree._
