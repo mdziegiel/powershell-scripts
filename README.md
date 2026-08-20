@@ -2,6 +2,8 @@
 
 PowerShell scripts for endpoint management, automation, reporting, and system configuration.
 
+Current script count: 150.
+
 ---
 
 ## Repository Structure
