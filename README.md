@@ -12,7 +12,7 @@ Current script count: 154.
 Scripts for user account management and lifecycle.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Add-ContactToAD.ps1](User-Provisioning/Add-ContactToAD.ps1) | Adds a contact to Active Directory | AD |
 | [Create-ContactsOnAD.ps1](User-Provisioning/Create-ContactsOnAD.ps1) | Creates contacts in Active Directory | AD |
 | [HelpDesk.ps1](User-Provisioning/HelpDesk.ps1) | Downloads a custom .ico file, creates a local folder to store it, and adds a HelpDesk shortcut to the Public Desktop using the icon. | Endpoint |
@@ -35,7 +35,7 @@ Scripts for user account management and lifecycle.
 Scripts for configuring and standardizing Windows endpoints.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [AlignWindows11taskbarleft.ps1](Endpoint-Configuration/AlignWindows11taskbarleft.ps1) | Configures the registry value 'TaskbarAl' under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced to 0, which aligns the taskbar to the left for the current user | Endpoint, Windows |
 | [Disable Windows Firewall Profiles.ps1](Endpoint-Configuration/Disable%20Windows%20Firewall%20Profiles.ps1) | Disables Domain, Private, and Public firewall profiles | Endpoint, Firewall, Security |
 | [DriveMapping.ps1](Endpoint-Configuration/DriveMapping.ps1) | Performs network drive mappings with PowerShell | Endpoint, Network |
@@ -61,7 +61,7 @@ Scripts for configuring and standardizing Windows endpoints.
 Scripts for installing, configuring, and removing software.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Analyze-WindowsStartup.ps1](Software-Management/Analyze-WindowsStartup.ps1) | Audit startup apps, services, and scheduled tasks | Endpoint, Software, Automation |
 | [Bitlocker_Sync.ps1](Software-Management/Bitlocker_Sync.ps1) | Retrieves the BitLocker recovery key protector ID for the system drive and backs it up to Azure AD (Entra ID) | AD, BitLocker, Entra, Security |
 | [CanonRemoval.ps1](Software-Management/CanonRemoval.ps1) | Identifies and removes Canon printer objects | Printer, Software |
@@ -96,7 +96,7 @@ Scripts for installing, configuring, and removing software.
 Scripts for security auditing, access control, and compliance.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Bitlocker_Sync.ps1](Security/Bitlocker_Sync.ps1) | Retrieves the BitLocker recovery key protector ID for the system drive and backs it up to Azure AD (Entra ID) | AD, BitLocker, Entra, Security |
 | [DisabledAdmin.ps1](Security/DisabledAdmin.ps1) | Checks if the local Administrator account exists and is enabled | LocalAdmin, Security |
 | [Get-ADUserLockout.ps1](Security/Get-ADUserLockout.ps1) | Tracking down account lockout sources with PowerShell | AD, Password, Security |
@@ -124,7 +124,7 @@ Scripts for security auditing, access control, and compliance.
 Scripts for reporting across systems.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Create-DL-Group-Report.ps1](Reporting/Create-DL-Group-Report.ps1) | Connects to Exchange Online and exports a distribution list membership report to CSV. | CSV, Exchange, Reporting |
 | [Export-ADGroupMemberToCSV.ps1](Reporting/Export-ADGroupMemberToCSV.ps1) | Lists users in an AD group and exports name, object class, and SamAccountName to CSV. | AD, CSV, Reporting |
 | [Export-AllMailboxesReport.ps1](Reporting/Export-AllMailboxesReport.ps1) | Retrieves mailbox details from Exchange Online, including aliases, mailbox size, full access permissions, send-as permissions, and forwarding configuration, then exports the results to CSV for reporting and audit… | CSV, Exchange, Reporting |
@@ -155,7 +155,7 @@ Scripts for reporting across systems.
 Scripts for branding, desktop layout, and sign-in presentation.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Copy-Startmenu.ps1](Branding/Copy-Startmenu.ps1) | Copies a Windows 11 Start menu template to all existing user profiles and the default profile | Branding |
 | [Create_Common_Desktop_Shortcuts.ps1](Branding/Create_Common_Desktop_Shortcuts.ps1) | Creates a standard set of desktop shortcuts for common applications so the desktop layout stays consistent. | Branding |
 | [Create_Common_StartMenu_Shortcuts.ps1](Branding/Create_Common_StartMenu_Shortcuts.ps1) | Creates a standard set of Start Menu shortcuts for common applications so users get a consistent launcher layout. | Branding |
@@ -174,7 +174,7 @@ Scripts for branding, desktop layout, and sign-in presentation.
 Scripts that do not fit the other categories cleanly.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Create-HyperV_VM.ps1](Miscellaneous/Create-HyperV_VM.ps1) | Creates Hyper-V virtual machines from a CSV definition. | CSV, HyperV |
 | [Delete-HyperV_VM.ps1](Miscellaneous/Delete-HyperV_VM.ps1) | Deletes Hyper-V virtual machines listed in a CSV file. | CSV, HyperV |
 | [Get-SharePermissionAudit.ps1](Miscellaneous/Get-SharePermissionAudit.ps1) | Recursively enumerates folders under a specified UNC path and reports identity, account type, access rights, allow/deny status, inheritance, and whether permissions are explicitly set or inherited | CSV, Network, Reporting |
@@ -187,7 +187,7 @@ Scripts that do not fit the other categories cleanly.
 Scripts for Microsoft 365, Azure, Exchange, Teams, and SharePoint administration.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Add-DelegationRights.ps1](Cloud-Administration/Add-DelegationRights.ps1) | Adds mailbox delegation rights for Office 365 users, with or without automapping. | AD, Exchange, M365 |
 | [Add-UserToSharedMailbox.ps1](Cloud-Administration/Add-UserToSharedMailbox.ps1) | Grants Office 365 users access to a shared mailbox, with or without automapping. | AD, Exchange, M365 |
 | [Cleanup-APIPermissions.ps1](Cloud-Administration/Cleanup-APIPermissions.ps1) | To enhance your tenant's security posture, it's crucial to regularly review the API permissions requested by SPFx solutions and compare them with those granted to the ”SharePoint Online Client Extensibility Web… | AD, M365, SharePoint |
@@ -211,7 +211,7 @@ Scripts for Microsoft 365, Azure, Exchange, Teams, and SharePoint administration
 Scripts for Intune, Autopilot, and device-management workflows.
 
 | Script | Description | Tags |
-|--------|-------------|
+|--------|-------------|------|
 | [Application_Get_Assign.ps1](Intune/Application_Get_Assign.ps1) | Authenticates to Microsoft Graph, enumerates Intune applications, and exports assignment and deployment details to a report. | Graph, Intune, Reporting |
 | [Change-DeviceCategory.ps1](Intune/Change-DeviceCategory.ps1) | Sets the device category for a single Intune device using the Microsoft Graph beta endpoint via the Intune PowerShell SDK (Connect-MSGraph). | Device, Endpoint, Graph, Intune |
 | [Change-DeviceCategoryMulti.ps1](Intune/Change-DeviceCategoryMulti.ps1) | Iterates over all managed devices and assigns a device category depending on whether the device name matches a pattern | Device, Intune |
