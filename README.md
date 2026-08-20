@@ -21,6 +21,13 @@ Scripts for user account management and lifecycle.
 | [New-LocalAdminAccount.ps1](User-Provisioning/New-LocalAdminAccount.ps1) | Creates new local admin account and adds to Administrators group |
 | [NewUserProvisioningGUI.ps1](User-Provisioning/NewUserProvisioningGUI.ps1) | WPF form replaces all Read-Host prompts |
 | [Reset-UserPassword.ps1](User-Provisioning/Reset-UserPassword.ps1) | Resets a user's AD password, unlocks the account if locked, and forces a password change at next logon |
+| [Add-UsersToGroup.ps1](User-Provisioning/Add-UsersToGroup.ps1) | Bulk add users from a CSV file to an Active Directory group. |
+| [CleanupDisabledUsers.ps1](User-Provisioning/CleanupDisabledUsers.ps1) | Stage and delete disabled Active Directory user accounts. |
+| [Get-UserFromOU.ps1](User-Provisioning/Get-UserFromOU.ps1) | Export Active Directory users from a specific OU to CSV. |
+| [CleanupInActiveComputers.ps1](User-Provisioning/CleanupInActiveComputers.ps1) | Stage and disable inactive Active Directory computer accounts. |
+| [Get-ADComputers.ps1](User-Provisioning/Get-ADComputers.ps1) | Export Active Directory computer objects and properties to CSV. |
+| [Get-ADGroupMembers.ps1](User-Provisioning/Get-ADGroupMembers.ps1) | Export members of one or more Active Directory groups. |
+| [Copy-ADUserGroupMembership.ps1](User-Provisioning/Copy-ADUserGroupMembership.ps1) | Copy group memberships from one Active Directory user to another. |
 
 ---
 
@@ -42,6 +49,8 @@ Scripts for configuring and standardizing Windows endpoints.
 | [Set-PowerConfiguration.ps1](Endpoint-Configuration/Set-PowerConfiguration.ps1) | Applies standardized power settings using powercfg, including sleep, hibernate, display timeout, and fast startup |
 | [Set-WindowsFeatures.ps1](Endpoint-Configuration/Set-WindowsFeatures.ps1) | Manages Windows optional features using DISM |
 | [wake-up-host.ps1](Endpoint-Configuration/wake-up-host.ps1) | This PowerShell script sends a magic UDP packet to a computer to wake him up (requires the target computer to have Wake-on-LAN activated). |
+| [new-reboot-task.ps1](Endpoint-Configuration/new-reboot-task.ps1) | Create a timed reboot scheduled task. |
+| [Scheduled-Tasks-Inventory.ps1](Endpoint-Configuration/Scheduled-Tasks-Inventory.ps1) | Inventory scheduled tasks on Windows servers. |
 
 ---
 
